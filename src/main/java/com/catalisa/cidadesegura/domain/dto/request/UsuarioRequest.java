@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class UsuarioRequest {
+
     @NotBlank
     private String nomeUsuario;
 

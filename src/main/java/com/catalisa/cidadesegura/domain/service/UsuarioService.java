@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new UsuarioNaoEncontradoException(idUsuario));
     }
 
+    @Transactional
     public UsuarioModel salvar(UsuarioModel usuarioModel) {
 
         return usuarioRepository.save(usuarioModel);
