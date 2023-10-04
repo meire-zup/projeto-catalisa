@@ -16,6 +16,7 @@ public class CidadesModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCidade;
     private String nomeCidade;
+
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private EstadosModel estado;
