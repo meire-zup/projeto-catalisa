@@ -5,20 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Cidades")
+@Table(name = "Usuarios")
 @AllArgsConstructor
 @NoArgsConstructor
-public class CidadesModel {
+public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCidade;
+    private Long idUsuario;
 
-    private String nomeCidade;
+    private String nomeUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private EstadosModel estado;
+    private String emailUsuario;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<PostagemModel> postagens;
+
 }
