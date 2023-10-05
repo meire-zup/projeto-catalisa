@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Estados")
+@Table(name = "Localidade")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocalidadeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEstado;
+    private Long idLocalidade;
 
     private String ruaLocalidade;
     private Integer numeroLocalidade;
     private String bairroLocalidade;
     private String pontoReferenciaLocalidade;
+
     @ManyToOne
     @JoinColumn(name = "cidade_id")
     private CidadesModel cidadesModel;
