@@ -19,6 +19,6 @@ public class EstadosModel {
     private Long idEstado;
     private String nomeEstado;
     private String uf;
-    @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL)
-    private List<CidadesModel> cidades;
+    /*@OneToMany(mappedBy = "estado", cascade = CascadeType.ALL)
+    private List<CidadesModel> cidades;*/
 }

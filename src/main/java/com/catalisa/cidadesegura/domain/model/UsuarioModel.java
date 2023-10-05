@@ -29,7 +29,7 @@ public class UsuarioModel {
     @Email
     private String emailUsuario;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<PostagemModel> postagens;
+    /*@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<PostagemModel> postagens;*/
 
 }
