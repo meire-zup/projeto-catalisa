@@ -40,7 +40,7 @@ public class LocalidadeController {
     public LocalidadeResponse buscarPorId(@PathVariable Long idLocalidade){
 
         LocalidadeResponse localidadeResponse = localidadeMapperAssembler
-                .localidadeModelParaLocalidadeResponse(localidadeService.buscarPorId(idLocalidade));
+                .localidadeModelParaLocalidadeResponse2(localidadeService.buscarPorId(idLocalidade));
         return localidadeResponse;
     }
     @ResponseStatus(HttpStatus.CREATED)

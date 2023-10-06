@@ -20,12 +20,17 @@ public class LocalidadeMapperAssembler {
         localidadeResponse.setCidadeResponse(modelMapper.map(localidadeModel.getCidadesModel(), CidadeResponse.class));
         return localidadeResponse;
     }
+    public LocalidadeResponse localidadeModelParaLocalidadeResponse2(LocalidadeModel localidadeModel) {
+        LocalidadeResponse localidadeResponse = modelMapper.map(localidadeModel, LocalidadeResponse.class);
+        return localidadeResponse;
+    }
+
     public List<LocalidadeResponse> toCollectionLocalidadeResponse(List<LocalidadeModel> localidades) {
 
         List<LocalidadeResponse> localidadeResponses = new ArrayList<>();
 
         for (LocalidadeModel localidadeModel : localidades) {
-            localidadeResponses.add(localidadeModelParaLocalidadeResponse(localidadeModel));
+            localidadeResponses.add(localidadeModelParaLocalidadeResponse2(localidadeModel));
         }
 
         return localidadeResponses;
