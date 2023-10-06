@@ -1,10 +1,8 @@
 package com.catalisa.cidadesegura.api.controller;
 
-import com.catalisa.cidadesegura.api.mapper.postagem.LocalidadeMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.postagem.LocalidadeMapperDisassembler;
 import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperDisassembler;
-import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperDisassembler;
 import com.catalisa.cidadesegura.domain.dto.request.PostagemRequest;
 import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
@@ -21,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,12 +44,6 @@ public class PostagemController {
     @Autowired
     private PostagemMapperAssembler postagemMapperAssembler;
 
-    @Autowired
-    private LocalidadeMapperDisassembler localidadeMapperDisassembler;
-
-    @Autowired
-    private PostagemMapperDisassembler postagemMapperDisassembler;
-
     @GetMapping
     public ResponseEntity<?> listarPostagens() {
 
@@ -67,7 +58,7 @@ public class PostagemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PostagemModel cadastrar(@RequestBody PostagemRequest postagemRequest) {
+    public PostagemResponse cadastrar(@RequestBody PostagemRequest postagemRequest) {
 
         UsuarioModel usuarioModel = usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(postagemRequest.getUsuario());
         usuarioRepository.save(usuarioModel);
@@ -94,6 +85,6 @@ public class PostagemController {
 
         postagemService.cadastrar(postagemModel);
 
-        return postagemModel;
+        return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
     }
 }

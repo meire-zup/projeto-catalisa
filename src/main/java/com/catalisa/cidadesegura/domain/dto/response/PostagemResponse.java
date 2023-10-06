@@ -1,7 +1,5 @@
 package com.catalisa.cidadesegura.domain.dto.response;
 
-import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
-import com.catalisa.cidadesegura.domain.model.UsuarioModel;
 import com.catalisa.cidadesegura.domain.model.enums.TipoDePerigo;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +10,9 @@ import java.time.LocalDate;
 @Setter
 public class PostagemResponse {
     private Long idPostagem;
-    private UsuarioModel usuario;
+    private UsuarioResponse usuario;
 
-    private LocalidadeModel localidade;
+    private LocalidadeResponse localidade;
 
     private LocalDate dataPostagem;
 
