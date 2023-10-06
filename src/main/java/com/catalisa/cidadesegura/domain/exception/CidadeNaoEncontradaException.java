@@ -6,9 +6,6 @@ public class CidadeNaoEncontradaException extends RuntimeException{
     }
 
     public CidadeNaoEncontradaException(Long idCidade){
-
-        this(String.format("Não existe cidade com id %d", idCidade));
-
+        this(String.format("Não existe cidade com id %d .", idCidade));
     }
-
 }

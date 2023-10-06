@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -28,9 +30,15 @@ public class PostagemModel {
 
     private LocalDate dataPostagem = LocalDate.now();
 
+    @Column(nullable = false)
+    @NotNull(message = "Campo 'tipo' não pode ser vazio.")
     private TipoDePerigo tipo;
 
+    @Column(nullable = false)
+    @NotEmpty(message = "Campo 'descricao' não pode ser vazio.")
     private String descricao;
 
+    @Column(nullable = false)
+    @NotEmpty(message = "Campo 'dica' não pode ser vazio.")
     private String dica;
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class LocalidadeService {
@@ -20,12 +21,10 @@ public class LocalidadeService {
     @Autowired
     private CidadesRepository cidadesRepository;
 
-    @Autowired
-    private EstadosRepository estadosRepository;
-    public CidadesModel buscarPorId(Long idCidade) {
+    public Optional<CidadesModel> buscarPorId(Long idCidade) {
 
-        return cidadesRepository.findById(idCidade)
-                .orElseThrow(() -> new CidadeNaoEncontradaException(idCidade));
+        return Optional.ofNullable(cidadesRepository.findById(idCidade)
+                .orElseThrow(() -> new CidadeNaoEncontradaException(idCidade)));
     }
 
     @Transactional

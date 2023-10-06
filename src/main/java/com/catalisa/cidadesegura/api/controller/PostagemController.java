@@ -1,8 +1,6 @@
 package com.catalisa.cidadesegura.api.controller;
 
-import com.catalisa.cidadesegura.api.mapper.postagem.LocalidadeMapperDisassembler;
 import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperAssembler;
-import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperDisassembler;
 import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperDisassembler;
 import com.catalisa.cidadesegura.domain.dto.request.PostagemRequest;
 import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
@@ -10,7 +8,6 @@ import com.catalisa.cidadesegura.domain.model.CidadesModel;
 import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
 import com.catalisa.cidadesegura.domain.model.UsuarioModel;
-import com.catalisa.cidadesegura.domain.repository.CidadesRepository;
 import com.catalisa.cidadesegura.domain.repository.UsuarioRepository;
 import com.catalisa.cidadesegura.domain.service.LocalidadeService;
 import com.catalisa.cidadesegura.domain.service.PostagemService;
@@ -19,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +29,6 @@ public class PostagemController {
 
     @Autowired
     private LocalidadeService localidadeService;
-
-    @Autowired
-    private CidadesRepository cidadesRepository;
 
     @Autowired
     private UsuarioMapperDisassembler usuarioMapperDisassembler;
@@ -58,15 +53,13 @@ public class PostagemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PostagemResponse cadastrar(@RequestBody PostagemRequest postagemRequest) {
-
+    public PostagemResponse cadastrar(@RequestBody @Valid PostagemRequest postagemRequest) {
         UsuarioModel usuarioModel = usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(postagemRequest.getUsuario());
         usuarioRepository.save(usuarioModel);
 
-        Optional<CidadesModel> cidadesModel = cidadesRepository.findById(postagemRequest.getLocalidade().getIdCidade());
+        Optional<CidadesModel> cidadesModel = localidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
 
         LocalidadeModel localidadeModel = new LocalidadeModel();
-        localidadeModel.setIdEstado(postagemRequest.getLocalidade().getIdEstado());
         localidadeModel.setRuaLocalidade(postagemRequest.getLocalidade().getRuaLocalidade());
         localidadeModel.setNumeroLocalidade(postagemRequest.getLocalidade().getNumeroLocalidade());
         localidadeModel.setBairroLocalidade(postagemRequest.getLocalidade().getBairroLocalidade());
