@@ -15,6 +15,7 @@ public class CidadesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCidade;
+
     private String nomeCidade;
 
     @ManyToOne
