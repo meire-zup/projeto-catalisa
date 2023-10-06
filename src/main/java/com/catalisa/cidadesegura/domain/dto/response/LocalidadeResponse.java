@@ -13,6 +13,4 @@ public class LocalidadeResponse {
     private String bairroLocalidade;
     private String pontoReferenciaLocalidade;
     private CidadeResponse cidadeResponse;
-
-
 }

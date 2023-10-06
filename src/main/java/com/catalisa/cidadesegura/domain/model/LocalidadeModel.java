@@ -1,5 +1,6 @@
 package com.catalisa.cidadesegura.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Localidade")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class LocalidadeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
