@@ -9,10 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Estados")
+@Table(name = "estado")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EstadosModel {
 
     @Id

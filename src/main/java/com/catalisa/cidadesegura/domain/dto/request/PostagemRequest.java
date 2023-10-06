@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class PostagemRequest {
     private UsuarioRequest usuario;
-    private LocalidadeRequest localidade;
+    private LocalidadePostagemRequest localidade;
 
     @Column(nullable = false)
     @NotNull(message = "Campo 'tipo' não pode ser vazio.")

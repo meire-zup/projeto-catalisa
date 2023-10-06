@@ -12,9 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Usuarios")
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "usuario")
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

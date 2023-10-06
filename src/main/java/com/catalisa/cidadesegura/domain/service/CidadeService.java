@@ -4,7 +4,6 @@ import com.catalisa.cidadesegura.domain.exception.CidadeNaoEncontradaException;
 import com.catalisa.cidadesegura.domain.model.CidadesModel;
 import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.repository.CidadesRepository;
-import com.catalisa.cidadesegura.domain.repository.EstadosRepository;
 import com.catalisa.cidadesegura.domain.repository.LocalidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-public class LocalidadeService {
+public class CidadeService {
 
     @Autowired
     private LocalidadeRepository localidadeRepository;
@@ -33,4 +32,6 @@ public class LocalidadeService {
         return localidadeRepository.save(localidadeModel);
 
     }
+
+
 }
