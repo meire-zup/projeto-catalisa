@@ -26,7 +26,7 @@ public class PostagemModel {
     @JoinColumn(name = "localidade_id")
     private LocalidadeModel localidade;
 
-    private LocalDate dataPostagem;
+    private LocalDate dataPostagem = LocalDate.now();
 
     private TipoDePerigo tipo;
 

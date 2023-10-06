@@ -9,12 +9,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class LocalidadeRequest {
-
     private Long idEstado;
     private String ruaLocalidade;
     private Integer numeroLocalidade;
     private String bairroLocalidade;
     private String pontoReferenciaLocalidade;
-
     private Long IdCidade;
 }

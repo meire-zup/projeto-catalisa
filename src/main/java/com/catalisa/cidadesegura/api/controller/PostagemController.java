@@ -78,7 +78,6 @@ public class PostagemController {
         PostagemModel postagemModel = new PostagemModel();
         postagemModel.setUsuario(usuarioModel);
         postagemModel.setLocalidade(localidadeModel);
-        postagemModel.setDataPostagem(postagemRequest.getDataPostagem());
         postagemModel.setTipo(postagemRequest.getTipo());
         postagemModel.setDescricao(postagemRequest.getDescricao());
         postagemModel.setDica(postagemRequest.getDica());

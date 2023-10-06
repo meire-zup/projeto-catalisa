@@ -11,16 +11,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PostagemRequest {
-
     private UsuarioRequest usuario;
-
     private LocalidadeRequest localidade;
-
-    private LocalDate dataPostagem;
-
     private TipoDePerigo tipo;
-
     private String descricao;
-
     private String dica;
 }

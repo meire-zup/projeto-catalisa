@@ -11,14 +11,9 @@ import java.time.LocalDate;
 public class PostagemResponse {
     private Long idPostagem;
     private UsuarioResponse usuario;
-
     private LocalidadeResponse localidade;
-
     private LocalDate dataPostagem;
-
     private TipoDePerigo tipo;
-
     private String descricao;
-
     private String dica;
 }

@@ -1,7 +1,7 @@
 package com.catalisa.cidadesegura.api.mapper.postagem;
 
-import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
-import com.catalisa.cidadesegura.domain.model.PostagemModel;
+import com.catalisa.cidadesegura.domain.dto.response.LocalidadeResponse;
+import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,18 +14,17 @@ public class LocalidadeMapperAssembler {
     @Autowired
     private ModelMapper modelMapper;
 
-    /*public LocalidadeResponse postagemModelParaPostagemResponse(PostagemModel postagemModel) {
-        return modelMapper.map(postagemModel, PostagemResponse.class);
+    public LocalidadeResponse localidadeModelParaLocalidadeResponse(LocalidadeModel localidadeModel) {
+        return modelMapper.map(localidadeModel, LocalidadeResponse.class);
     }
 
-    public List<PostagemResponse> toCollectionPostagemResponse(List<PostagemModel> postagens) {
+    public List<LocalidadeResponse> toCollectionLocalidadeResponse(List<LocalidadeModel> localidades) {
 
-        List<PostagemResponse> postagemResponses = new ArrayList<>();
+        List<LocalidadeResponse> localidadeResponses = new ArrayList<>();
 
-        for (PostagemModel postagemModel : postagens) {
-            postagemResponses.add(postagemModelParaPostagemResponse(postagemModel));
+        for (LocalidadeModel localidadeModel : localidades) {
+            localidadeResponses.add(localidadeModelParaLocalidadeResponse(localidadeModel));
         }
-
-        return postagemResponses;
-    }*/
+        return localidadeResponses;
+    }
 }

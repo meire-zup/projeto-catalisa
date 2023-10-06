@@ -26,7 +26,6 @@ public class PostagemMapperAssembler {
         for (PostagemModel postagemModel : postagens) {
             postagemResponses.add(postagemModelParaPostagemResponse(postagemModel));
         }
-
         return postagemResponses;
     }
 }
