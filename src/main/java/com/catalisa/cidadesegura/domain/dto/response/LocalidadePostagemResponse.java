@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LocalidadeResponse {
+public class LocalidadePostagemResponse {
     private String ruaLocalidade;
     private Integer numeroLocalidade;
     private String bairroLocalidade;

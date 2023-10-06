@@ -12,9 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "Postagens")
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "postagem")
 public class PostagemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

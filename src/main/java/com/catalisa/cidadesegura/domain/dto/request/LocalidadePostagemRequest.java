@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
-public class LocalidadeRequest {
+public class LocalidadePostagemRequest {
     @Column(nullable = false)
     @NotEmpty(message = "Campo 'ruaLocalidade' não pode ser vazio.")
     private String ruaLocalidade;
