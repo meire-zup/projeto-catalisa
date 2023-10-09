@@ -17,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,15 +83,17 @@ public class PostagemController {
         return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
     }
 
-//    @GetMapping("/por-bairro")
-//    public List<LocalidadeModel> buscarPorBairro(@RequestParam String bairro) {
-//        return cidadeService.buscarPorBairro(bairro);
-//    }
-//
-//    // Endpoint para buscar localidades por cidade
-//    @GetMapping("/por-cidade")
-//    public List<LocalidadeModel> buscarPorCidade(@RequestParam String cidade) {
-//        return cidadeService.buscarPorCidade(cidade);
-//    }
 
+    @GetMapping("/por-cidade/{cidade}")
+    public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) throws UnsupportedEncodingException {
+
+        List<PostagemModel> postagens = postagemService.buscarPorCidade(cidade);
+
+        if (postagens.isEmpty()) {
+            return ResponseEntity.ok("Nenhuma postagem dessa cidade realizada ainda.");
+        } else {
+
+            return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
+        }
+    }
 }
