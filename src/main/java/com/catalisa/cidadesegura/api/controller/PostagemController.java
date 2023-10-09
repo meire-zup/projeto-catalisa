@@ -84,7 +84,7 @@ public class PostagemController {
     }
 
     @GetMapping("/por-cidade/{cidade}")
-    public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) throws UnsupportedEncodingException {
+    public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) {
 
         //String cidadeDecodificada = URLDecoder.decode(cidade, "UTF-8");
 
@@ -92,6 +92,18 @@ public class PostagemController {
 
         if (postagens.isEmpty()) {
             return ResponseEntity.ok("Nenhuma postagem dessa cidade realizada ainda.");
+        } else {
+
+            return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
+        }
+    }
+    @GetMapping("/por-bairro/{bairro}")
+    public ResponseEntity<?> buscarPorBairro(@PathVariable String bairro) {
+
+        List<PostagemModel> postagens = postagemService.buscarPorBairro(bairro);
+
+        if (postagens.isEmpty()) {
+            return ResponseEntity.ok("Nenhuma postagem desse bairro realizada ainda.");
         } else {
 
             return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));

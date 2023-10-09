@@ -28,5 +28,8 @@ public class PostagemService {
     public List<PostagemModel> buscarPorCidade(String cidade) {
         return postagemRepository.findByCidade(cidade);
     }
+    public List<PostagemModel> buscarPorBairro(String bairro) {
+        return postagemRepository.findByBairro(bairro);
+    }
 
 }
