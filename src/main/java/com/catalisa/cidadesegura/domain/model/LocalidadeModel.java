@@ -9,14 +9,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Localidades")
+@Table(name = "localidade")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class LocalidadeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEstado;
+    private Long idLocalidade;
 
     @Column(nullable = false)
     @NotEmpty(message = "Campo 'rua' não pode ser vazio.")

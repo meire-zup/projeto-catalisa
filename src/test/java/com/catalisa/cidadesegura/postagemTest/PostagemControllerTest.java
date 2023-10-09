@@ -3,17 +3,14 @@ package com.catalisa.cidadesegura.postagemTest;
 import com.catalisa.cidadesegura.api.controller.PostagemController;
 import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperDisassembler;
-import com.catalisa.cidadesegura.domain.dto.request.PostagemRequest;
-import com.catalisa.cidadesegura.domain.dto.request.UsuarioRequest;
 import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
 import com.catalisa.cidadesegura.domain.model.CidadesModel;
 import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
 import com.catalisa.cidadesegura.domain.model.UsuarioModel;
 import com.catalisa.cidadesegura.domain.repository.UsuarioRepository;
-import com.catalisa.cidadesegura.domain.service.LocalidadeService;
+import com.catalisa.cidadesegura.domain.service.CidadeService;
 import com.catalisa.cidadesegura.domain.service.PostagemService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -22,17 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -69,7 +58,7 @@ public class PostagemControllerTest {
     private PostagemService postagemService;
 
     @MockBean
-    private LocalidadeService localidadeService;
+    private CidadeService cidadeService;
 
     @MockBean
     private UsuarioMapperDisassembler usuarioMapperDisassembler;
@@ -92,10 +81,10 @@ public class PostagemControllerTest {
 
     @Test
     public void testCadastrarPostagem() throws Exception {
-        when(localidadeService.buscarPorId(any())).thenReturn(Optional.of(cidadesModel));
+        when(cidadeService.buscarPorId(any())).thenReturn(Optional.of(cidadesModel));
         when(usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(any())).thenReturn(usuarioModel);
         when(usuarioRepository.save(any())).thenReturn(usuarioModel);
-        when(localidadeService.salvar(any())).thenReturn(localidadeModel);
+        when(cidadeService.salvar(any())).thenReturn(localidadeModel);
         when(postagemService.cadastrar(any())).thenReturn(postagemModel);
         when(postagemMapperAssembler.postagemModelParaPostagemResponse(any())).thenReturn(new PostagemResponse());
 
@@ -124,7 +113,7 @@ public class PostagemControllerTest {
 
         verify(usuarioMapperDisassembler).usuarioRequestParaUsuarioModel(any());
         verify(usuarioRepository).save(any());
-        verify(localidadeService).salvar(any());
+        verify(cidadeService).salvar(any());
         verify(postagemService).cadastrar(any());
         verify(postagemMapperAssembler).postagemModelParaPostagemResponse(any());
     }

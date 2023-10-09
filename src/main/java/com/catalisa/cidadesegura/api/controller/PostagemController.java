@@ -9,7 +9,7 @@ import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
 import com.catalisa.cidadesegura.domain.model.UsuarioModel;
 import com.catalisa.cidadesegura.domain.repository.UsuarioRepository;
-import com.catalisa.cidadesegura.domain.service.LocalidadeService;
+import com.catalisa.cidadesegura.domain.service.CidadeService;
 import com.catalisa.cidadesegura.domain.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class PostagemController {
     private PostagemService postagemService;
 
     @Autowired
-    private LocalidadeService localidadeService;
+    private CidadeService cidadeService;
 
     @Autowired
     private UsuarioMapperDisassembler usuarioMapperDisassembler;
@@ -60,7 +60,7 @@ public class PostagemController {
         UsuarioModel usuarioModel = usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(postagemRequest.getUsuario());
         usuarioRepository.save(usuarioModel);
 
-        Optional<CidadesModel> cidadesModel = localidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
+        Optional<CidadesModel> cidadesModel = cidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
 
         LocalidadeModel localidadeModel = new LocalidadeModel();
         localidadeModel.setRuaLocalidade(postagemRequest.getLocalidade().getRuaLocalidade());
@@ -69,7 +69,7 @@ public class PostagemController {
         localidadeModel.setPontoReferenciaLocalidade(postagemRequest.getLocalidade().getPontoReferenciaLocalidade());
         localidadeModel.setCidadesModel(cidadesModel.get());
 
-        localidadeService.salvar(localidadeModel);
+        cidadeService.salvar(localidadeModel);
 
         PostagemModel postagemModel = new PostagemModel();
         postagemModel.setUsuario(usuarioModel);
@@ -83,10 +83,9 @@ public class PostagemController {
         return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
     }
 
+
     @GetMapping("/por-cidade/{cidade}")
     public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) throws UnsupportedEncodingException {
-
-        //String cidadeDecodificada = URLDecoder.decode(cidade, "UTF-8");
 
         List<PostagemModel> postagens = postagemService.buscarPorCidade(cidade);
 
