@@ -22,6 +22,14 @@ public class PostagemService {
 
     public Optional<PostagemModel> listarPorId(Long idPostagem){return  postagemRepository.findById(idPostagem);}
 
+    public Optional<PostagemModel> buscarPostagemPorIdEUsername(Long id,String username) {
+        return postagemRepository.findByIdAndUsername(id,username);
+    }
+
+    public void deletarPostagem(Long id){
+        postagemRepository.deleteById(id);
+    }
+
     @Transactional
     public PostagemModel cadastrar(PostagemModel postagemModel) {
         return postagemRepository.save(postagemModel);
@@ -33,5 +41,4 @@ public class PostagemService {
     public List<PostagemModel> buscarPorBairro(String bairro) {
         return postagemRepository.findByBairro(bairro);
     }
-
 }

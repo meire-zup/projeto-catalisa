@@ -2,11 +2,11 @@ package com.catalisa.cidadesegura.api.controller;
 
 import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperDisassembler;
+import com.catalisa.cidadesegura.domain.dto.request.PostagemDeleteRequest;
 import com.catalisa.cidadesegura.domain.dto.request.PostagemRequest;
 import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
 import com.catalisa.cidadesegura.domain.exception.PostagemNaoEncontradaException;
 import com.catalisa.cidadesegura.domain.exception.UsuarioNaoCadastradoException;
-import com.catalisa.cidadesegura.domain.exception.UsuarioNaoEncontradoException;
 import com.catalisa.cidadesegura.domain.model.CidadesModel;
 import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
@@ -17,7 +17,6 @@ import com.catalisa.cidadesegura.domain.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -69,7 +68,7 @@ public class PostagemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PostagemResponse cadastrar(@RequestBody @Valid PostagemRequest postagemRequest) {
+    public PostagemResponse cadastrarPostagem(@RequestBody @Valid PostagemRequest postagemRequest) {
 
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findByUsername(postagemRequest.getUsername());
 
@@ -100,6 +99,22 @@ public class PostagemController {
         return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
     }
 
+    @DeleteMapping(path = "/{idPostagem}")
+    public ResponseEntity<?> deletarPostagem(@PathVariable Long idPostagem, @RequestBody PostagemDeleteRequest postagemDeleteRequest){
+        Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
+
+        if (!postagemModel.isPresent()) {
+            throw new PostagemNaoEncontradaException("Id de postagem inválido.");
+        }
+
+        Optional<PostagemModel> postagemExistente = postagemService.buscarPostagemPorIdEUsername(idPostagem,postagemDeleteRequest.getUsername());
+        if (!postagemExistente.isPresent()) {
+            throw new PostagemNaoEncontradaException("Não foi localizado postagem para esse username.");
+        }
+
+        postagemService.deletarPostagem(idPostagem);
+        return ResponseEntity.ok().body("Postagem excluída com sucesso.");
+    }
 
     @GetMapping("/por-cidade/{cidade}")
     public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) {
@@ -113,6 +128,7 @@ public class PostagemController {
             return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
         }
     }
+
     @GetMapping("/por-bairro/{bairro}")
     public ResponseEntity<?> buscarPorBairro(@PathVariable String bairro) {
 
