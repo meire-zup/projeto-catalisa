@@ -9,13 +9,14 @@ import com.catalisa.cidadesegura.domain.service.UsuarioService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/login")
 public class UsuarioController {
 
     @Autowired
@@ -41,16 +42,11 @@ public class UsuarioController {
                 .usuarioModelParaUsuarioResponse(usuarioService.buscarPorId(idUsuario));
         return usuarioResponse;
     }
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public UsuarioResponse cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest){
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody UsuarioRequest request) {
 
-        UsuarioModel usuarioModel = usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(usuarioRequest);
-
-        UsuarioResponse usuarioResponse = usuarioMapperAssembler.usuarioModelParaUsuarioResponse(usuarioService.salvar(usuarioModel));
-
-        return usuarioResponse;
-
+        UsuarioModel usuario = request.toModel();
+        return usuarioService.salvar(usuario, HttpStatus.CREATED);
     }
 
     @PutMapping("/{idUsuario}")
@@ -74,4 +70,5 @@ public class UsuarioController {
         usuarioService.excluir(idUsuario);
 
     }
+
 }
