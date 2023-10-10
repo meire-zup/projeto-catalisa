@@ -4,6 +4,9 @@ import com.catalisa.cidadesegura.api.mapper.postagem.PostagemMapperAssembler;
 import com.catalisa.cidadesegura.api.mapper.usuario.UsuarioMapperDisassembler;
 import com.catalisa.cidadesegura.domain.dto.request.PostagemRequest;
 import com.catalisa.cidadesegura.domain.dto.response.PostagemResponse;
+import com.catalisa.cidadesegura.domain.exception.PostagemNaoEncontradaException;
+import com.catalisa.cidadesegura.domain.exception.UsuarioNaoCadastradoException;
+import com.catalisa.cidadesegura.domain.exception.UsuarioNaoEncontradoException;
 import com.catalisa.cidadesegura.domain.model.CidadesModel;
 import com.catalisa.cidadesegura.domain.model.LocalidadeModel;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
@@ -14,12 +17,10 @@ import com.catalisa.cidadesegura.domain.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,11 +55,27 @@ public class PostagemController {
         return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
     }
 
+    @GetMapping(path = "/{idPostagem}")
+    public ResponseEntity<?> listarPostagemPorId(@PathVariable Long idPostagem) {
+
+        Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
+
+        if (!postagemModel.isPresent()) {
+            throw new PostagemNaoEncontradaException("Id de postagem inválido.");
+        }
+
+        return ResponseEntity.ok(postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel.get()));
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public PostagemResponse cadastrar(@RequestBody @Valid PostagemRequest postagemRequest) {
-        UsuarioModel usuarioModel = usuarioMapperDisassembler.usuarioRequestParaUsuarioModel(postagemRequest.getUsuario());
-        usuarioRepository.save(usuarioModel);
+
+        Optional<UsuarioModel> usuarioModel = usuarioRepository.findByUsername(postagemRequest.getUsername());
+
+        if(!usuarioModel.isPresent()){
+            throw new UsuarioNaoCadastradoException("Usuário não cadastrado.") ;
+        }
 
         Optional<CidadesModel> cidadesModel = cidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
 
@@ -72,7 +89,7 @@ public class PostagemController {
         cidadeService.salvar(localidadeModel);
 
         PostagemModel postagemModel = new PostagemModel();
-        postagemModel.setUsuario(usuarioModel);
+        postagemModel.setUsuario(usuarioModel.get());
         postagemModel.setLocalidade(localidadeModel);
         postagemModel.setTipo(postagemRequest.getTipo());
         postagemModel.setDescricao(postagemRequest.getDescricao());
