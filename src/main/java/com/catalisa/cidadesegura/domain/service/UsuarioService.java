@@ -4,6 +4,7 @@ import com.catalisa.cidadesegura.domain.dto.response.UsuarioResponse;
 import com.catalisa.cidadesegura.domain.exception.UsuarioNaoEncontradoException;
 import com.catalisa.cidadesegura.domain.model.UsuarioModel;
 import com.catalisa.cidadesegura.domain.repository.UsuarioRepository;
+import com.catalisa.cidadesegura.security.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,7 @@ public class UsuarioService {
     @Transactional
     public UsuarioModel salvar(UsuarioModel usuarioModel) {
 
-
-        usuarioRepository.adicionarUsuarioRole(usuarioModel.getIdUsuario(), 1L);
-
         return usuarioRepository.save(usuarioModel);
-
-
 
     }
 
@@ -54,7 +50,6 @@ public class UsuarioService {
         }
     }
 
-
     @Transactional
     public ResponseEntity<?> salvar(UsuarioModel usuario, HttpStatus status) {
         if (usuario.existeOutroUsuarioComMesmoEmail(usuarioRepository)) {
@@ -66,7 +61,8 @@ public class UsuarioService {
         } else {
 
             usuario = usuarioRepository.save(usuario);
-            usuarioRepository.adicionarUsuarioRole(usuario.getIdUsuario(), 1L);
+            usuario.setRole(RoleEnum.USER);
+            //usuarioRepository.adicionarUsuarioRole(usuario.getIdUsuario(), 1L);
             return ResponseEntity
                     .status(status)
                     .body(UsuarioResponse.toResponse(usuario));

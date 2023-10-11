@@ -32,5 +32,3 @@ public class UsuarioRequest {
         return new UsuarioModel(this.nomeUsuario, this.emailUsuario, this.username, password);
     }
 }
-
-
