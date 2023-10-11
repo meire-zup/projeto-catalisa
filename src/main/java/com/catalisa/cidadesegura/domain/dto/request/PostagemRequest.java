@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class PostagemRequest {
-    private String username;
+
     private LocalidadePostagemRequest localidade;
 
     @Column(nullable = false)

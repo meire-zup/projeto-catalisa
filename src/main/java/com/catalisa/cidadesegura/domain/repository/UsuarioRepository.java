@@ -11,8 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
-    // esse aqui está sobrando na refatoração
-    //Optional<UsuarioModel> findByUsername(String username);
     Optional<UsuarioModel> findByEmailUsuario(String email);
     Optional<UsuarioModel> findByPassword(String password);
 
