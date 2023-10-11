@@ -66,7 +66,7 @@ public class PostagemController {
         return ResponseEntity.ok(postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel.get()));
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    /*@ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public PostagemResponse cadastrarPostagem(@RequestBody @Valid PostagemRequest postagemRequest) {
 
@@ -97,7 +97,7 @@ public class PostagemController {
         postagemService.cadastrar(postagemModel);
 
         return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
-    }
+    }*/
 
     @DeleteMapping(path = "/{idPostagem}")
     public ResponseEntity<?> deletarPostagem(@PathVariable Long idPostagem, @RequestBody PostagemDeleteRequest postagemDeleteRequest){

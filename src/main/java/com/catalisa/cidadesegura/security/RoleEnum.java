@@ -2,7 +2,21 @@ package com.catalisa.cidadesegura.security;
 
 public enum RoleEnum {
 
-    ROLE_USER,
-    ROLE_ADMIN
+    USER("USER"),
+    ADMIN("ADMIN");
 
+    private String role;
+
+    RoleEnum(String role) {
+        this.role = role;
+    }
+    // criei esse contrutor para não dar erro
+    RoleEnum() {
+
+    }
+
+    public String getRole() {
+        return role;
+    }
 }
+
