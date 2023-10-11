@@ -1,7 +1,6 @@
 package com.catalisa.cidadesegura.domain.service;
 
 
-import com.catalisa.cidadesegura.domain.exception.CidadeNaoEncontradaException;
 import com.catalisa.cidadesegura.domain.model.PostagemModel;
 import com.catalisa.cidadesegura.domain.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +20,20 @@ public class PostagemService {
         return postagemRepository.findAll();
     }
 
+    public Optional<PostagemModel> listarPorId(Long idPostagem){return  postagemRepository.findById(idPostagem);}
+
+    public Optional<PostagemModel> buscarPostagemPorIdEUsername(Long id,String username) {
+        return postagemRepository.findByIdAndUsername(id,username);
+    }
+
+    public void deletarPostagem(Long id){
+        postagemRepository.deleteById(id);
+    }
+
     @Transactional
     public PostagemModel cadastrar(PostagemModel postagemModel) {
         return postagemRepository.save(postagemModel);
     }
-
 
     public List<PostagemModel> buscarPorCidade(String cidade) {
         return postagemRepository.findByCidade(cidade);
@@ -33,5 +41,4 @@ public class PostagemService {
     public List<PostagemModel> buscarPorBairro(String bairro) {
         return postagemRepository.findByBairro(bairro);
     }
-
 }

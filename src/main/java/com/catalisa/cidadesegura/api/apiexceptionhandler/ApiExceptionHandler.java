@@ -1,6 +1,8 @@
-package com.catalisa.cidadesegura.api.exceptionhandler;
+package com.catalisa.cidadesegura.api.apiexceptionhandler;
 
 import com.catalisa.cidadesegura.domain.exception.CidadeNaoEncontradaException;
+import com.catalisa.cidadesegura.domain.exception.PostagemNaoEncontradaException;
+import com.catalisa.cidadesegura.domain.exception.UsuarioNaoCadastradoException;
 import com.catalisa.cidadesegura.domain.exception.UsuarioNaoEncontradoException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<?> handleEntidadeNaoEncontradaException(
             UsuarioNaoEncontradoException ex, WebRequest request) {
@@ -44,6 +46,15 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(CidadeNaoEncontradaException.class)
     public ResponseEntity<String> handleCidadeNaoEncontradaException(CidadeNaoEncontradaException e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    @org.springframework.web.bind.annotation.ExceptionHandler(UsuarioNaoCadastradoException.class)
+    public ResponseEntity<String> handleUsuarioNaoCadastradoException(UsuarioNaoCadastradoException e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(PostagemNaoEncontradaException.class)
+    public ResponseEntity<String> handlePostagemNaoEncontradaException(PostagemNaoEncontradaException e){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 }
 

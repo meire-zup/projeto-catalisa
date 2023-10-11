@@ -3,6 +3,7 @@ package com.catalisa.cidadesegura.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,10 @@ public class WebSecurityConfig {
 
         httpSecurity.httpBasic().and().authorizeHttpRequests()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/postagens").permitAll()
+                .antMatchers(HttpMethod.GET,"/postagens/{idPostagem}").permitAll()
+                .antMatchers(HttpMethod.POST,"/postagens").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/postagens/{idPostagem}").permitAll()
                 .anyRequest().authenticated().and().csrf().disable();
 
         return httpSecurity.build();

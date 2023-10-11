@@ -18,4 +18,6 @@ public interface PostagemRepository extends JpaRepository<PostagemModel, Long> {
     @Query("SELECT p FROM PostagemModel p WHERE p.localidade.bairroLocalidade LIKE %:bairro%")
     List<PostagemModel> findByBairro(@Param("bairro") String bairro);
 
+    @Query("SELECT p FROM PostagemModel p WHERE p.id = :postId AND p.usuario.username = :username")
+    Optional<PostagemModel> findByIdAndUsername(@Param("postId") Long postId, @Param("username") String username);
 }

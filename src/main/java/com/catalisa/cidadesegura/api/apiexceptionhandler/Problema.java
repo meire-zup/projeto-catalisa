@@ -1,4 +1,4 @@
-package com.catalisa.cidadesegura.api.exceptionhandler;
+package com.catalisa.cidadesegura.api.apiexceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
