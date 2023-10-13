@@ -13,7 +13,6 @@ import com.catalisa.cidadesegura.domain.model.UsuarioModel;
 import com.catalisa.cidadesegura.domain.repository.UsuarioRepository;
 import com.catalisa.cidadesegura.domain.service.CidadeService;
 import com.catalisa.cidadesegura.domain.service.PostagemService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/postagens")
+@RequestMapping("/cidade-segura")
 public class PostagemController {
 
     @Autowired
@@ -60,7 +59,7 @@ public class PostagemController {
         return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
     }
 
-    @GetMapping(path = "/{idPostagem}")
+    @GetMapping(path = "postagens/{idPostagem}")
     public ResponseEntity<?> listarPostagemPorId(@PathVariable Long idPostagem) {
 
         Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
@@ -104,21 +103,24 @@ public class PostagemController {
         return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel);
     }
 
-    /*@PutMapping(path = "/{idPostagem}")
-    public PostagemResponse editarPostagem(@PathVariable Long idPostagem, @RequestBody @Valid PostagemRequest postagemRequest){
+    @PutMapping(path = "postagens/{idPostagem}")
+    public PostagemResponse editarPostagem(@PathVariable Long idPostagem, @RequestBody @Valid PostagemRequest postagemRequest) throws Exception {
+
         Optional<PostagemModel> postagemAtual = postagemService.listarPorId(idPostagem);
 
         if (!postagemAtual.isPresent()) {
-            throw new PostagemNaoEncontradaException("Postagem de id "+idPostagem+" não localizado.");
+            throw new PostagemNaoEncontradaException("Postagem de id " + idPostagem + " não localizada.");
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String nomeUsuario = authentication.getName();
 
+        if (!postagemAtual.get().getUsuario().getUsername().equals(nomeUsuario)) {
+            throw new PostagemNaoEncontradaException("Você não tem permissão para editar esta postagem.");
+        }
+
         Optional<CidadesModel> cidadesModel = cidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
 
-        System.out.println(cidadesModel.get().getEstado().getNomeEstado());
-        System.out.println(cidadesModel);
         LocalidadeModel localidadeModel = new LocalidadeModel();
         localidadeModel.setRuaLocalidade(postagemRequest.getLocalidade().getRuaLocalidade());
         localidadeModel.setNumeroLocalidade(postagemRequest.getLocalidade().getNumeroLocalidade());
@@ -127,24 +129,21 @@ public class PostagemController {
         localidadeModel.setCidadesModel(cidadesModel.get());
 
         cidadeService.salvar(localidadeModel);
-        postagemAtual.get().setLocalidade(localidadeModel);
-        postagemAtual.get().setTipo(postagemRequest.getTipo());
-        postagemAtual.get().setDescricao(postagemRequest.getDescricao());
-        postagemAtual.get().setDica(postagemRequest.getDica());
 
-        postagemService.salvar(postagemAtual.get());
-        return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemAtual.get());
+        PostagemModel postagem = postagemAtual.get();
+        postagem.setTipo(postagemRequest.getTipo());
+        postagem.setDescricao(postagemRequest.getDescricao());
+        postagem.setDica(postagemRequest.getDica());
+        postagem.setLocalidade(localidadeModel);
 
-        *//*if(!postagemAtual.get().getUsuario().getUsername().equals(nomeUsuario)){
-            throw new PostagemNaoEncontradaException("Não é possível editar postagens feitas por outros usuários.");
-        }else{
-            BeanUtils.copyProperties(postagemRequest, postagemAtual, "idPostagem","usuario");
-            PostagemModel postagemModel1 = postagemService.salvar(postagemAtual.get());
-            return postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel1);
-        }*//*
-    }*/
+        PostagemModel postagemAtualizada = postagemService.salvar(postagem);
 
-    @DeleteMapping(path = "/{idPostagem}")
+        PostagemResponse postagemResponse = postagemMapperAssembler.postagemModelParaPostagemResponse(postagemAtualizada);
+
+        return postagemResponse;
+    }
+
+    @DeleteMapping(path = "postagens/{idPostagem}")
     public ResponseEntity<?> deletarPostagem(@PathVariable Long idPostagem){
         String role = null;
 
@@ -179,7 +178,7 @@ public class PostagemController {
         }
     }
 
-    @GetMapping("/por-cidade/{cidade}")
+    @GetMapping("postagens/por-cidade/{cidade}")
     public ResponseEntity<?> buscarPorCidade(@PathVariable String cidade) {
 
         List<PostagemModel> postagens = postagemService.buscarPorCidade(cidade);
@@ -192,7 +191,7 @@ public class PostagemController {
         }
     }
 
-    @GetMapping("/por-bairro/{bairro}")
+    @GetMapping("postagens/por-bairro/{bairro}")
     public ResponseEntity<?> buscarPorBairro(@PathVariable String bairro) {
 
         List<PostagemModel> postagens = postagemService.buscarPorBairro(bairro);

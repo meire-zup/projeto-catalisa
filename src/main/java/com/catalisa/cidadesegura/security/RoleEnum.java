@@ -10,7 +10,7 @@ public enum RoleEnum {
     RoleEnum(String role) {
         this.role = role;
     }
-    // criei esse contrutor para não dar erro
+
     RoleEnum() {
 
     }

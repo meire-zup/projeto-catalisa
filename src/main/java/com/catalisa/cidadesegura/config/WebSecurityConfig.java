@@ -26,18 +26,6 @@ public class WebSecurityConfig {
     @Autowired
     SecurityFilter securityFilter;
 
-    /* @Bean
-     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
-
-      return httpSecurity
-              .csrf(csrf -> csrf.disable())
-              .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-              .authorizeHttpRequests(authorize-> authorize
-                      .requestMatchers(HttpMethod.POST, "/login").hasRole("ROLE_USER")
-                      .anyRequest().authenticated())
-              .build();
-
-     }*/
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return  httpSecurity
