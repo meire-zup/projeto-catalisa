@@ -35,6 +35,8 @@ public class PostagemService {
         return postagemRepository.save(postagemModel);
     }
 
+    public PostagemModel salvar(PostagemModel postagemModel){return postagemRepository.save(postagemModel);}
+
     public List<PostagemModel> buscarPorCidade(String cidade) {
         return postagemRepository.findByCidade(cidade);
     }
