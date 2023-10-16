@@ -34,7 +34,6 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST, "/cidade-segura/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/cidade-segura/cadastrar").permitAll()
-                        .antMatchers(HttpMethod.DELETE,"/cidade-segura/excluir/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -59,7 +59,7 @@ public class PostagemController {
         return ResponseEntity.ok(postagemMapperAssembler.toCollectionPostagemResponse(postagens));
     }
 
-    @GetMapping(path = "postagens/{idPostagem}")
+    @GetMapping(path = "/postagens/{idPostagem}")
     public ResponseEntity<?> listarPostagemPorId(@PathVariable Long idPostagem) {
 
         Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
@@ -72,7 +72,7 @@ public class PostagemController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping(path = "/postagens")
     public PostagemResponse cadastrarPostagem(@RequestBody @Valid PostagemRequest postagemRequest) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

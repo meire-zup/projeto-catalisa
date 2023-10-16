@@ -39,17 +39,6 @@ public class UsuarioService {
 
     }
 
-    public void excluir(Long idUsuario) {
-
-        try {
-            usuarioRepository.deleteById(idUsuario);
-        } catch (EmptyResultDataAccessException ex) {
-
-            throw new UsuarioNaoEncontradoException(idUsuario);
-
-        }
-    }
-
     @Transactional
     public ResponseEntity<?> salvar(UsuarioModel usuario, HttpStatus status) {
         if (usuario.existeOutroUsuarioComMesmoEmail(usuarioRepository)) {

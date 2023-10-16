@@ -19,7 +19,6 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
 public class PostagemServiceTest {
     @InjectMocks
     private PostagemService postagemService;
