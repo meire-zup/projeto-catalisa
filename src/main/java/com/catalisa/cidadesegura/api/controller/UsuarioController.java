@@ -85,12 +85,4 @@ public class UsuarioController {
         return usuarioResponse;
     }
 
-    @DeleteMapping("/excluir/{idUsuario}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void  excluir(@PathVariable Long idUsuario){
-
-        usuarioService.excluir(idUsuario);
-
-    }
-
 }
