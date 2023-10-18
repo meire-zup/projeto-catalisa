@@ -121,7 +121,7 @@ Se você encontrar algum problema ou tiver sugestões de melhorias, não hesite 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/meirelopes"><img src="https://avatars.githubusercontent.com/u/105396487?v=4" width="100px;" alt=""/><br/><strong>Jucemeire Lopes</strong></a><br/><a href="https://www.linkedin.com/in/jucemeirelopes/">LinkedIn</a></td>
-    <td align="center"><a href="https://github.com/mateus-damasceno-zup"><img src="https://avatars.githubusercontent.com/u/105396487?v=4" width="100px;" alt=""/><br/><strong>Mateus Damasceno</strong></a><br/><a href="https://www.linkedin.com/in/mateus-inacio-rodrigues-damasceno-711b8227/">LinkedIn</a></td>
+    <td align="center"><a href="https://github.com/mateus-damasceno-zup"><img src="https://avatars.githubusercontent.com/u/133882244?v=4" width="100px;" alt=""/><br/><strong>Mateus Damasceno</strong></a><br/><a href="https://www.linkedin.com/in/mateus-inacio-rodrigues-damasceno-711b8227/">LinkedIn</a></td>
     <td align="center"><a href="https://github.com/NicolyZup"><img src="https://avatars.githubusercontent.com/u/133882322?v=4" width="100px;" alt=""/><br/><strong>Nicoly Barros</strong></a><br/><a href="https://www.linkedin.com/in/nicoly-barros-henrique-vitorio/">LinkedIn</a></td>
        
   </tr>
