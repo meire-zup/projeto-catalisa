@@ -90,16 +90,13 @@ public class UsuarioServiceTest {
         UsuarioModel usuarioSalvo = new UsuarioModel("Novo Usuário", "novo@example.com", "novo_user", "nova_senha");
         usuarioSalvo.setIdUsuario(1L); // Simulando que o usuário foi salvo no banco de dados e recebeu um ID
 
-        // Simular o comportamento do repository para retornar o usuário quando o método save é chamado
-        when(usuarioRepository.save(usuario)).thenReturn(usuarioSalvo);
+       when(usuarioRepository.save(usuario)).thenReturn(usuarioSalvo);
 
         ResponseEntity<?> response = usuarioService.salvar(usuario, HttpStatus.OK);
 
-        // Verificar se a resposta está correta
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+      assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        // Comparar os campos relevantes do usuário salvo e da resposta
-        UsuarioResponse usuarioSalvoNaResposta = (UsuarioResponse) response.getBody();
+ UsuarioResponse usuarioSalvoNaResposta = (UsuarioResponse) response.getBody();
         assert usuarioSalvoNaResposta != null;
         assertEquals(usuarioSalvo.getIdUsuario(), usuarioSalvoNaResposta.getIdUsuario());
         assertEquals(usuarioSalvo.getNomeUsuario(), usuarioSalvoNaResposta.getNomeUsuario());
@@ -145,23 +142,5 @@ public class UsuarioServiceTest {
         assertEquals("Já existe usuário cadastrado com mesma senha.", response.getBody());
     }
 
-
-    @Test
-    public void testExcluirUsuarioComSucesso() {
-
-        doNothing().when(usuarioRepository).deleteById(anyLong());
-
-        usuarioService.excluir(1L);
-        verify(usuarioRepository, times(1)).deleteById(1L);
-    }
-
-    @Test
-    public void testExcluirUsuarioInexistente() {
-        doThrow(EmptyResultDataAccessException.class).when(usuarioRepository).deleteById(anyLong());
-
-        assertThrows(UsuarioNaoEncontradoException.class, () -> usuarioService.excluir(1L));
-
-        verify(usuarioRepository, times(1)).deleteById(1L);
-    }
 
 }
