@@ -54,7 +54,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(PostagemNaoEncontradaException.class)
     public ResponseEntity<String> handlePostagemNaoEncontradaException(PostagemNaoEncontradaException e){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        int status = e.getStatus();
+        return ResponseEntity.status(status).body(e.getMessage());
     }
 }
 

@@ -65,7 +65,7 @@ public class PostagemController {
         Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
 
         if (!postagemModel.isPresent()) {
-            throw new PostagemNaoEncontradaException("Id de postagem inválido.");
+            throw new PostagemNaoEncontradaException("Id de postagem inválido.",400);
         }
 
         return ResponseEntity.ok(postagemMapperAssembler.postagemModelParaPostagemResponse(postagemModel.get()));
@@ -109,14 +109,14 @@ public class PostagemController {
         Optional<PostagemModel> postagemAtual = postagemService.listarPorId(idPostagem);
 
         if (!postagemAtual.isPresent()) {
-            throw new PostagemNaoEncontradaException("Postagem de id " + idPostagem + " não localizada.");
+            throw new PostagemNaoEncontradaException("Postagem de id " + idPostagem + " não localizada.",404);
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String nomeUsuario = authentication.getName();
 
         if (!postagemAtual.get().getUsuario().getUsername().equals(nomeUsuario)) {
-            throw new PostagemNaoEncontradaException("Você não tem permissão para editar esta postagem.");
+            throw new PostagemNaoEncontradaException("Você não tem permissão para editar esta postagem.",403);
         }
 
         Optional<CidadesModel> cidadesModel = cidadeService.buscarPorId(postagemRequest.getLocalidade().getIdCidade());
@@ -161,7 +161,7 @@ public class PostagemController {
         Optional<PostagemModel> postagemModel = postagemService.listarPorId(idPostagem);
 
         if (!postagemModel.isPresent()) {
-            throw new PostagemNaoEncontradaException("Postagem de id "+idPostagem+" não localizado.");
+            throw new PostagemNaoEncontradaException("Postagem de id "+idPostagem+" não localizado.",404);
         }
         System.out.println(nomeUsuario);
         System.out.println(role);
@@ -170,7 +170,7 @@ public class PostagemController {
             return ResponseEntity.ok().body("Postagem excluída com sucesso!");
         } else {
             if (!postagemModel.get().getUsuario().getUsername().equals(nomeUsuario)) {
-                throw new PostagemNaoEncontradaException("Não é possível excluir postagens feitas por outros usuários.");
+                throw new PostagemNaoEncontradaException("Não é possível excluir postagens feitas por outros usuários.",403);
             }
 
             postagemService.deletarPostagem(idPostagem);

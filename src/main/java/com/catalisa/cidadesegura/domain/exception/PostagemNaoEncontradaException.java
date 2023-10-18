@@ -1,11 +1,17 @@
 package com.catalisa.cidadesegura.domain.exception;
 
 public class PostagemNaoEncontradaException extends RuntimeException{
-    public  PostagemNaoEncontradaException(String mensagem){
+    private int status;
+    public  PostagemNaoEncontradaException(String mensagem, int status){
         super(mensagem);
+        this.status = status;
     }
 
     public PostagemNaoEncontradaException(){
 
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
