@@ -86,24 +86,13 @@ Classe principal para executar nosso projeto. Ele inicializa nosso aplicativo Sp
 
 ### Pacote test
 
-- `apitest`: contém as classes responsáveis pelos testes de API. É utilizado o banco de dados PostgreSQL para a execução dos testes.
-
-- `integracaotest`: contém as classes responsáveis pelos testes de integração.  É utilizado o banco de dados PostgreSQL para a execução dos testes.
-
-- `mockmvc`: contém as classes de testes utilizando o @WebMvcTest para testar a classe controller.
-
-- `util`: Contém as classes utilitárias, que são projetadas para fornecer funcionalidades comuns ou auxiliares que podem ser usadas em toda a aplicação. 
-
+Contém as classes responsáveis pelos testes das classes de serviço utilizando o mockito.
 
 ## Detalhes do Projeto:
 
 O projeto inclui operações básicas de CRUD seguindo o uso de códigos de status HTTP apropriados. O tratamento de exceções é gerenciado globalmente com um `@ControllerAdvice` para garantir o tratamento consistente de exceções em todo o aplicativo.
 
 O projeto utiliza o banco de dados postgreSQL para ambiente de desenvolvimento.
-
-## Documentação
-
-A documentação da API foi descrita obedecendo a especificação OpenAPI e pode ser encontrada na UI do Swagger. Para visualizá-lo, visite: Swagger UI.: [Swagger UI](http://localhost:8080/swagger-ui.html).
 
 ## Postman
 
