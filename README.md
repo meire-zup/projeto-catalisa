@@ -18,6 +18,7 @@ A **Cidade Segura API** é uma aplicação REST projetada para melhorar a segura
 - [Principais Tecnologias](#principais-tecnologias)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Detalhes do Projeto](#detalhes-do-projeto)
+- [Instruções de Execução](#instrucoes-de-execucao)
 - [Postman](#postman)
 - [Sugestões](#sugestões)
 - [Autores](#autores)
@@ -92,6 +93,8 @@ Contém as classes responsáveis pelos testes das classes de serviço utilizando
 O projeto inclui operações básicas de CRUD seguindo o uso de códigos de status HTTP apropriados. O tratamento de exceções é gerenciado globalmente com um `@ControllerAdvice` para garantir o tratamento consistente de exceções em todo o aplicativo.
 
 O projeto utiliza o banco de dados postgreSQL para ambiente de desenvolvimento.
+
+## Instruções de Execução:
 
 ## Postman
 
