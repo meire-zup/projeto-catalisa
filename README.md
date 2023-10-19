@@ -25,7 +25,7 @@ A **Cidade Segura API** é uma aplicação REST projetada para melhorar a segura
 
 ## Principais Tecnologias:
 
-- **Java 17**
+- **Java 11**
 
 - **Spring Boot 2.7.16**: Spring Boot, reponsável por aumentar a produtividade do desenvolvedor com sua configuração automática disponível em  [Spring Initializr](https://start.spring.io/)
 
@@ -96,7 +96,7 @@ O projeto utiliza o banco de dados postgreSQL para ambiente de desenvolvimento.
 
 ## Instruções de Execução:
 
-Certifique-se de ter o JDK 17 instalado em sua máquina antes de seguir estas instruções.
+Certifique-se de ter o JDK 11 instalado em sua máquina antes de seguir estas instruções.
 
 1. Clonando o Projeto
 git clone https://github.com/meire-zup/projeto-catalisa.git
