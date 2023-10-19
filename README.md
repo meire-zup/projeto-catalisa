@@ -116,7 +116,7 @@ Em seu ambiente de desenvolvimento, siga estas etapas:
 ## Postman
 
 Foi utilizado o Postman para  testar as solicitações HTTP, como GET, POST, PUT, DELETE e outros. 
-O arquivo da Collection gerenciamento-de-estoque pode ser acessado por meio do link: [collection-cidade-segura-api](https://documenter.getpostman.com/view/20786077/2s9YJf1NC5)
+O arquivo da Collection pode ser acessado por meio do link: [collection-cidade-segura-api](https://documenter.getpostman.com/view/20786077/2s9YJf1NC5)
 
 ## Sugestões
 
