@@ -8,7 +8,7 @@ A **Cidade Segura API** é uma aplicação REST projetada para melhorar a segura
         <img src="https://img.shields.io/badge/Java-v11-blue.svg" />
     </a>
     <a alt="Spring Boot">
-        <img src="https://img.shields.io/badge/Spring%20Boot-v2.7.15-brightgreen.svg" />
+        <img src="https://img.shields.io/badge/Spring%20Boot-v2.7.16-brightgreen.svg" />
     </a>
     <a alt="PostgreSQL">
         <img src="https://img.shields.io/badge/PostgreSQL-v42.6.0-blue.svg" />
@@ -25,9 +25,9 @@ A **Cidade Segura API** é uma aplicação REST projetada para melhorar a segura
 
 ## Principais Tecnologias:
 
-- **Java 11**
+- **Java 17**
 
-- **Spring Boot 2.7.15**: Spring Boot, reponsável por aumentar a produtividade do desenvolvedor com sua configuração automática disponível em  [Spring Initializr](https://start.spring.io/)
+- **Spring Boot 2.7.16**: Spring Boot, reponsável por aumentar a produtividade do desenvolvedor com sua configuração automática disponível em  [Spring Initializr](https://start.spring.io/)
 
 - **Spring Data JPA**: Abstração da camada de acesso ao banco de dados, reduzindo o código padrão.
 
