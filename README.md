@@ -97,7 +97,7 @@ O projeto utiliza o banco de dados postgreSQL para ambiente de desenvolvimento.
 ## Postman
 
 Foi utilizado o Postman para  testar as solicitações HTTP, como GET, POST, PUT, DELETE e outros. 
-O arquivo da Collection gerenciamento-de-estoque pode ser acessado por meio do link: [gerenciamento-de-estoque](https://github.com/meirelopes/estoque-de-produtos/blob/main/estoque/gerenciamento-de-estoque.postman_collection.json)
+O arquivo da Collection gerenciamento-de-estoque pode ser acessado por meio do link: [collection-cidade-segura-api](https://documenter.getpostman.com/view/20786077/2s9YJf1NC5)
 
 ## Sugestões
 
