@@ -18,7 +18,7 @@ A **Cidade Segura API** é uma aplicação REST projetada para melhorar a segura
 - [Principais Tecnologias](#principais-tecnologias)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Detalhes do Projeto](#detalhes-do-projeto)
-- [Instruções de Execução](#instrucoes-de-execucao)
+- [Instruções de Execução](#instruções-de-execução)
 - [Postman](#postman)
 - [Sugestões](#sugestões)
 - [Autores](#autores)
