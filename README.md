@@ -96,6 +96,23 @@ O projeto utiliza o banco de dados postgreSQL para ambiente de desenvolvimento.
 
 ## Instruções de Execução:
 
+Certifique-se de ter o JDK 11 instalado em sua máquina antes de seguir estas instruções.
+
+1. Clonando o Projeto
+git clone https://github.com/meire-zup/projeto-catalisa.git
+
+2. Criando Tabelas no Banco de Dados
+Certifique-se de que a configuração do banco de dados no arquivo `application.properties` está correta.
+
+3. Populando as Tabelas Cidade e Estado com Arquivos CSV
+
+Em seu ambiente de desenvolvimento, siga estas etapas:
+- Clique com o botão direito na tabela `cidade` ou `estado`.
+- Selecione a opção "Importar Dados".
+- Escolha a opção "CSV" e avance.
+- Avance nas etapas de importação, seguindo as instruções do seu ambiente de desenvolvimento.
+- As tabelas `cidade` e `estado` agora estarão populadas com os dados do arquivo CSV.
+
 ## Postman
 
 Foi utilizado o Postman para  testar as solicitações HTTP, como GET, POST, PUT, DELETE e outros. 
